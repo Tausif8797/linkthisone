@@ -36,9 +36,9 @@
         });
 
 
-        document.querySelector('form').addEventListener('submit', function () {
-    this.reset();
-});
+//         document.querySelector('form').addEventListener('submit', function () {
+//     this.reset();
+// });
     </script>
        
 </body>
