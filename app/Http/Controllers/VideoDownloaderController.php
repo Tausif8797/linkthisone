@@ -40,12 +40,15 @@ class VideoDownloaderController extends Controller
                 File::makeDirectory($outputPath, 0755, true);
             }
 
+            $timestamp = time();
+$command = "yt-dlp -o \"{$outputPath}/{$timestamp}_%(title)s.%(ext)s\" {$videoUrl}";
+
             // Use double quotes for Windows paths
-            $command = "yt-dlp -o \"{$outputPath}/%(title)s.%(ext)s\" {$videoUrl}";
+            // $command = "yt-dlp -o \"{$outputPath}/%(title)s.%(ext)s\" {$videoUrl}";
             
             exec($command, $output, $returnCode);
             
-            Log::info("return code: {$returnCode}");
+            // Log::info("return code: {$returnCode}");
 
             if ($returnCode !== 0) {
                 return back()->withErrors(['video_url' => 'Failed to download video.']);
@@ -56,6 +59,9 @@ class VideoDownloaderController extends Controller
             if (empty($files)) {
                 return back()->withErrors(['video_url' => 'No video was downloaded.']);
             }
+            Log::info("Video URL: {$videoUrl}");
+Log::info("yt-dlp command: {$command}");
+Log::info("return code: {$returnCode}");
 
             $latestFile = end($files);
             return response()->download($latestFile->getPathname());
