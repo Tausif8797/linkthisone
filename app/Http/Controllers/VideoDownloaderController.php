@@ -42,7 +42,7 @@ class VideoDownloaderController extends Controller
 
             // Use double quotes for Windows paths
             $command = "yt-dlp -o \"{$outputPath}/%(title)s.%(ext)s\" {$videoUrl}";
-            // Log::info("Executing command: {$command}");
+            Log::info("Executing command: {$command}");
 
             exec($command, $output, $returnCode);
 
