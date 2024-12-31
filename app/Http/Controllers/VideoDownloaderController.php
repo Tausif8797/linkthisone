@@ -42,9 +42,10 @@ class VideoDownloaderController extends Controller
 
             // Use double quotes for Windows paths
             $command = "yt-dlp -o \"{$outputPath}/%(title)s.%(ext)s\" {$videoUrl}";
-            Log::info("Executing command: {$command}");
-
+            
             exec($command, $output, $returnCode);
+            
+            Log::info("return code: {$returnCode}");
 
             if ($returnCode !== 0) {
                 return back()->withErrors(['video_url' => 'Failed to download video.']);
