@@ -34,6 +34,11 @@
                 alert('Failed to read clipboard: ' + err.message);
             }
         });
+
+
+        document.querySelector('form').addEventListener('submit', function () {
+    this.reset();
+});
     </script>
        
 </body>
